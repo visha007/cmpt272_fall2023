@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>asn2_Shatavisha</title>
+    <link rel="stylesheet" href="histogram.css">
+    <script src="calculate.js" defer></script>
+</head>
+<body onload = "init()">
+    <header>
+        <h2>Histogram Generator</h2>
+    </header>
+    <main id = "main-body">
+        <section id = "lb-section">
+            <h3>Lower Bounds</h3>
+            <table id="lb-table">
+                <tr>
+                    <td>Max</td>
+                    <td class="lb-input">
+                        <input type="number" id="value-max" min="0" value="100.00" step="0.01">
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>A+</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-Aplus" min="0" value="95.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-A" min="0" value="90.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>A-</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-Aminus" min="0" value="85.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>B+</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-Bplus" min="0" value="80.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-B" min="0" value="75.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>B-</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-Bminus" min="0" value="70.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>C+</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-Cplus" min="0" value="65.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-C" min="0" value="60.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>C-</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-Cminus" min="0" value="55.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-D" min="0" value="50.00" step="0.01">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>F</td>
+                        <td class="lb-input">
+                            <input type="number" id="value-F" min="0" value="0.00" step="0.01">
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section id="histogram">
+                <h3>Histogram</h3>
+                <div class="chart__header">
+                    <div class="chart__bars">
+                      <!-- For reference
+                      <div class="chart__bar" data-label="Mon." data-value="$56.2" style="--height: 68%" tabindex="0">
+                        <span class="sr-only">Monday - $56.2</span>
+                      </div> -->
+                    </div>
+                </div>
+            </section>
+            <section id="stats">
+                <h3>Stats</h3>
+                <section>
+                    <table>
+                        <tr>
+                            <td>Highest:</td>
+                            <td>
+                                <label id="value-highest"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lowest:</td>
+                            <td>
+                                <label id="value-lowest"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mean:</td>
+                            <td>
+                                <label id="value-mean"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Median:</td>
+                            <td>
+                                <label id="value-median"></label>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+            <footer>
+                <label for="fileInput" id="custom-file-upload">
+                    Choose File.. 
+                </label>
+                <input type="file" id="fileInput">
+                <pre id="fileContent"></pre>
+            </footer>
+        </main>
+    </body>
+</html>

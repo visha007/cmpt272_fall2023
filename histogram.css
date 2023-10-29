@@ -1,0 +1,159 @@
+*{
+    font-family: 'Arial', 'Yantramanav', 'sans-serif';
+}
+
+body{
+    background-color: white;
+}
+
+header{
+    background-color: #A6192E;
+    width: 100%;
+    height: 65px;
+}
+
+header h2{
+    color: white;
+    font-weight: bold;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+#main-body{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: white;
+    margin-top: 10px;
+    height: 100%;
+}
+
+h3{
+    color: #CC0633; 
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#lb-section{
+    background-color: #d3d3d3;
+    padding: 5px;
+}
+
+#histogram{
+    background-color: #d3d3d3;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+#stats{
+    background-color: #d3d3d3;
+}
+
+.chart {
+    width: min(100% - 1rem, 35rem);
+    padding: clamp(1em, 4vw, 2em);
+    border-radius: 0.5em;
+  
+    background-color: hsl(100, 100%, 100%, 0.5);
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    box-shadow: 0.25em 0.25em 0.5em 0.1em rgba(0, 0, 0, 0.1);
+  }
+  
+.chart__header {
+    padding: 0.25em;
+    text-align: center;
+}
+  
+.chart__header h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+  
+.chart__bars {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: end;
+    gap: clamp(0.25em, 2vw, 1em);
+  
+    aspect-ratio: 3 / 2;
+    margin-block: 2em 1em;
+}
+  
+.chart__bar {
+    display: grid;
+    place-items: center;
+  
+    height: var(--height);
+    background-color: crimson;
+    border-radius: 0.25em;
+  
+    position: relative;
+}
+  
+.chart__bar:is(:hover, :focus) {
+    background-color: teal;
+}
+  
+.chart__bar::before,
+.chart__bar::after {
+    position: absolute;
+    display: inline-block;
+    margin-block: 0.25rem;
+}
+  
+/* value text */
+.chart__bar::before {
+    content: attr(data-value);
+    bottom: 100%;
+    opacity: 0;
+}
+  
+.chart__bar:is(:hover, :focus)::before {
+    opacity: 1;
+}
+  
+/* label text */
+.chart__bar::after {
+    content: attr(data-label);
+    top: 100%;
+}
+  
+/* @see https://gist.github.com/ffoodd/000b59f431e3e64e4ce1a24d5bb36034 */
+.sr-only {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important;
+}
+  
+/* Style the file input (hide it) */
+input[type="file"] {
+    display: none;
+}
+  
+/* Style the custom file upload button */
+#custom-file-upload {
+    border: 1px solid #A6192E; /* Red border color */
+    border-radius: 5px; /* Rounded edges */
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: white; /* Text color */
+    background-color: #A6192E; /* Background color, you can adjust this as needed */
+    margin-top: 10px;
+}
+
+  
+  
+
+
+
+
+
+
