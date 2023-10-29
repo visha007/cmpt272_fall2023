@@ -1,0 +1,207 @@
+* {
+    font-family: 'Yantramanav', 'Arial', 'sans-serif';
+}
+
+body{
+    background-color: #C7CDD1;
+}
+
+.header-main{
+    display: flex;
+    height: 100px;
+    background-color: #2B3942;
+}
+
+.text1{
+    display: flex;
+    font-size: 30px;
+    color: orangered;
+    margin-top: 30px;
+    margin-left: 25px;
+    margin-right: 7px;
+}
+
+.text2{
+    display: flex;
+    font-size: 30px;
+    margin-top: 30px;
+    color: white;
+}
+
+#menu_icon{
+    height: 20px;
+    width: 20px;
+    margin-left: auto;  /*pushes the icon to the far right side of the flex container, aka., the header*/
+    margin-top: 35px;
+    margin-right: 25px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /*creates two columns allocating equal spacing for each col*/
+    gap: 10px;
+}
+
+.invent_descrip{
+    padding: 20px;
+}
+
+.cs_descrip{
+    padding: 10px;
+}
+
+.bus_descrip{
+    padding: 10px;
+}
+
+/* Style the link */
+#bus_faculty_link {
+    color: brown; 
+    text-decoration: none;
+}
+
+#bus-hover {
+    display: none; /*Hide the block of text by default*/
+}
+
+#bus_faculty_link:hover + #bus-hover {
+    display: block; /* Display the paragraph when hovering over the link */
+    cursor: pointer;
+}
+
+/* Style the link */
+#cs_faculty_link {
+    color: brown; 
+    text-decoration: none;
+}
+
+#cs-hover {
+    display: none; /*Hide the block of text by default*/
+}
+
+#cs_faculty_link:hover + #cs-hover {
+    display: block; /* Display the paragraph when hovering over the link */
+    cursor: pointer;
+}
+
+.cs_inventory_options{
+    display: flex;
+}
+
+.cs_images{
+    margin-top: 15px;
+}
+
+.image_container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.image_container img{
+    height: auto;
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+#back_option {
+    display: block; /* Ensure the link is treated as a block-level element */
+    color: darkred;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+#back_option:hover{
+    color: black;
+}
+
+/*when web page is viewed on a page whose width <= 550 pixels*/
+@media only screen and (max-width:550px){
+    .container{
+        grid-template-columns: 1fr;
+    }
+}
+
+/*2 rows with 2 images on each row*/
+@media only screen and (max-width:770px){
+    .image_container{
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .text1{
+        font-size: 25px;
+    }
+    .text2{
+        font-size: 25px;
+    }
+}
+  
+/*4 rows with 1 image on each row*/
+@media only screen and (max-width:480px){
+    .image_container{
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: 1fr;
+    }
+    .text1{
+        font-size: 20px;
+    }
+    .text2{
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width:377px) {
+    .text1{
+        font-size: 10px;
+    }
+    .text2{
+        font-size: 10px;
+    }
+    #menu_icon{
+        height: 15px;
+        width: 15px;
+    }
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+    transition: box-shadow 0.3s ease; /* Add a smooth transition effect */
+}
+
+figure:hover{
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Add the shadow effect on hover */
+}
+
+figure:hover .see_more {
+    display: block;
+    background-color: orange;
+    color: white;
+    font-size: 15px;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+figcaption {
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    text-align: left;
+    padding: 10px;
+}
+
+.see_more{
+    display: none;
+}
+
+
+
+
+
