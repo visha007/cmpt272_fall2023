@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piggy_App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="Pigs.css">
+</head>
+<body>
+    <section id="container">
+        <h1>Pigs App</h1>
+        <table id="pig_table">
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>More Info</th>
+                <th>Delete</th>
+            </tr>
+        </table>
+    </section>
+    <div id="moreInfoContainer" style="display: none;"></div>
+    <button class="btn btn-primary" id="addPig">Add Pig</button>
+    <button class="btn btn-danger" id="cancelChanges">Cancel</button>
+    <section id="addPiggyFormContainer">
+        <form id="addPiggyForm">
+            <h2>Add New</h2>
+            <label for="piggyName">Name<span id="required">*</span></label>
+            <input type="text" id="piggyName" required>
+
+            <label for="piggyHeight">Height<span id="required">*</span></label>
+            <input type="number" id="piggyHeight" min="0" max="100" step = "0.01" required>
+
+            <label for="piggyWeight">Weight<span id="required">*</span></label>
+            <input type="number" id="piggyWeight" min="0" max="100" step = "0.01" required>
+
+            <label for="piggyPersonality">Personality<span id="required">*</span></label>
+            <input type="text" id="piggyPersonality" required>
+
+            <label for="piggyCategory">Category<span id="required">*</span></label><br>
+            <select name="category" id="piggyCategory" class="input" required>
+                <option value="none">Choose category...</option>
+                <option value="Grey">Grey</option>
+                <option value="Chestnut">Chestnut</option>
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+            </select>
+            
+            <label for="piggyBreed" id = "breed_label">Breed</label>
+            <input type="text" id="piggyBreed" value = "" required>
+
+            <label for="piggyStrength" id = "strength_label" style="display: none;">Strength</label>
+            <input type="range" min="1" max="10" value="5" class="slider" id="piggyStrength" required>
+
+            <label for="piggyRunning" id = "run_label" style="display: none;">Running</label>
+            <input type="range" min="0" max="100" value="50" class="slider" id="piggyRunning" required>
+
+            <label for="piggySwimming" id = "swim_label" style="display: none;">Swimming</label>
+            <input type="range" min="0" max="100" value="50" class="slider" id="piggySwimming" required>
+
+            <label for="piggyLanguage" id = "lang_label" style="display: none;">Language</label>
+            <input type="text" id="piggyLanguage" value = "" required>
+
+            <button type="button" class="btn btn-primary" id="submitBtn" style="background-color: blue;">Submit</button>
+        </form>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.47/system.js" integrity="sha512-mkBpeD76fJnxFHGZstCL0mPCW6E3RFtUzfp5Ye8oQg2rxQNHy4BgHsbmvSizsq3fgF4PGozPI1BzGCB/h1Yq5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+          System.defaultJSExtensions = true
+          System.import('main')
+    </script>
+</body>
+</html>

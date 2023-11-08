@@ -1,0 +1,93 @@
+/* Style for the entire table container */
+#container {
+    text-align: center;
+}
+
+/* Style for the table itself */
+#pig_table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px auto;
+}
+
+/* Style for table headers (th) */
+#pig_table th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Style for table rows (tr) */
+#pig_table tr {
+    border: 1px solid #ddd;
+}
+
+/* Style for table cells (td) */
+#pig_table td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* Style for the form container */
+#addPiggyForm {
+    display: none;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#piggyBreed, #piggyStrength, #piggyRunning, #piggySwimming, #piggyLanguage, #breed_label{
+    display: none;  /*will initially be invisible*/
+}
+
+#cancelChanges{
+    display: none;
+    margin-top: 10px;
+}
+
+#addPiggyForm label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+#addPiggyForm input[type="text"],
+#addPiggyForm input[type="number"],
+#addPiggyForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#addPiggyForm select {
+    padding: 8px; 
+}
+
+#addPiggyForm input[type="text"]:focus,
+#addPiggyForm input[type="number"]:focus,
+#addPiggyForm select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#addPiggyForm button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#addPiggyForm button:hover {
+    background-color: #0056b3;
+}
