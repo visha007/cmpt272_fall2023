@@ -1,43 +1,12 @@
 import { Pig } from "./Pig";
 import { PiggyController } from "./PigController";
 
-var nameExists = false;
-var heightExists = false;
-var weightExists = false;
-var personalityExists = false;
-var categoryExists = false;
-var breedExists = false;
-var languageExists = false;
-
-var pigController = new PiggyController();
-var existingData = JSON.parse(localStorage.PigArray);
-if (existingData.length > 0){
-    for (var i = 0; i < existingData.length; i++){
-        addRowToTable(existingData[i]); // add the exisitng data to the table
-    }
-}
-
 // sort the array of contents into Black, White, Grey, Chestnut - not traditional sort
 var blackPigs:Pig[] = [];
 var whitePigs:Pig[] = [];
 var greyPigs:Pig[] = [];
 var chestnutPigs:Pig[] = [];
-
-var valuesArray:Pig[] = []
-
-
-
-
-/*if (existingData.length > 0){
-    var keys = Object.keys(localStorage);
-    var key = keys[0]
-    console.log(JSON.parse(localStorage[keys[0]]))
-    /*for (var i = 0; i < keys.length; i++){
-        var key = keys[i];
-        valuesArray[i] = JSON.parse(localStorage[key]);
-        console.log(valuesArray[i]);
-    }*/
-//}
+var sortedPigs:Pig[] = [];
 
 // buttons and form
 var form = document.getElementById("addPiggyForm"); // Define the 'form' variable
@@ -47,17 +16,75 @@ var submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
 
 // form inputs
 var piggoName = document.getElementById("piggyName") as HTMLTextAreaElement;
+
 var piggoHeight = document.getElementById("piggyHeight") as HTMLTextAreaElement;
 var piggoWeight = document.getElementById("piggyWeight") as HTMLTextAreaElement; 
+
+var piggoRealHeight = document.getElementById("piggyHeightValue") as HTMLTextAreaElement;
+var piggoRealWeight = document.getElementById("piggyWeightValue") as HTMLTextAreaElement;
+
+piggoRealHeight.value = piggoHeight.value;
+piggoRealWeight.value = piggoWeight.value;
+
+piggoHeight.addEventListener("input", function(){
+    piggoRealHeight.value = piggoHeight.value;
+});
+
+piggoWeight.addEventListener("input", function(){
+    piggoRealWeight.value = piggoWeight.value;
+});
+
+piggoRealHeight.addEventListener("input", function(){
+    piggoHeight.value = piggoRealHeight.value;
+});
+
+piggoRealWeight.addEventListener("input", function(){
+    piggoWeight.value = piggoRealWeight.value;
+});
+
 var piggoPersonality = document.getElementById("piggyPersonality") as HTMLTextAreaElement;
 var piggoCategory = document.getElementById("piggyCategory") as HTMLTextAreaElement;
 var piggoBreed = document.getElementById("piggyBreed") as HTMLTextAreaElement;
+
 var piggoStrengthAbility = document.getElementById("piggyStrength") as HTMLTextAreaElement;
 var piggoRunningAbility = document.getElementById("piggyRunning") as HTMLTextAreaElement;
 var piggoSwimmingAbility = document.getElementById("piggySwimming") as HTMLTextAreaElement;
-var piggoLanguageAbility = document.getElementById("piggyLanguage") as HTMLTextAreaElement;
 
-// if (!nameExists || !heightExists || !weightExists || !personalityExists || !categoryExists || !breedExists || !languageExists)
+var piggoStrengthRealAbility = document.getElementById("piggyStrengthValue") as HTMLTextAreaElement;
+var piggoRunningRealAbility = document.getElementById("piggyRunningValue") as HTMLTextAreaElement;
+var piggoSwimmingRealAbility = document.getElementById("piggySwimmingValue") as HTMLTextAreaElement;
+
+piggoStrengthRealAbility.value = piggoStrengthAbility.value;
+piggoRunningRealAbility.value = piggoRunningAbility.value;
+piggoSwimmingRealAbility.value = piggoSwimmingAbility.value;
+
+piggoStrengthAbility.addEventListener("input", function(){
+    piggoStrengthRealAbility.value = piggoStrengthAbility.value;
+});
+
+piggoRunningAbility.addEventListener("input", function(){
+    piggoRunningRealAbility.value = piggoRunningAbility.value;
+});
+
+piggoSwimmingAbility.addEventListener("input", function(){
+    piggoSwimmingRealAbility.value = piggoSwimmingAbility.value;
+});
+
+///
+
+piggoStrengthRealAbility.addEventListener("input", function(){
+    piggoStrengthAbility.value = piggoStrengthRealAbility.value;
+});
+
+piggoRunningRealAbility.addEventListener("input", function(){
+    piggoRunningAbility.value = piggoRunningRealAbility.value;
+});
+
+piggoSwimmingRealAbility.addEventListener("input", function(){
+    piggoSwimmingAbility.value = piggoSwimmingRealAbility.value;
+});
+
+var piggoLanguageAbility = document.getElementById("piggyLanguage") as HTMLTextAreaElement;
 
 // labels for extra attributes
 var piggoBreedLabel = document.getElementById("breed_label") as HTMLTextAreaElement;
@@ -81,12 +108,74 @@ cancelBtn!.addEventListener("click", function(){
     cancelBtn!.style.display = "none"
 });
 
+var pigController = new PiggyController();
+// if localStorage for this site is not empty
+if (localStorage.length > 0){
+    var existingData = JSON.parse(localStorage.PigArray);
+    for (var i = 0; i < existingData.length; i++){
+        addRowToTable(existingData[i]); // add the existing data to the table
+    }
+    // sort pigs
+    sortPigsByCategory();
+    updateTable(sortedPigs);
+}
+
+// categorize the pigs by Category then sort pigs in each category by name
+function sortPigsByCategory(){
+    var existingData = JSON.parse(localStorage.PigArray);
+    for (var i = 0; i < existingData.length; i++){
+        if (existingData[i].pigCategory == "Black"){
+            blackPigs.push(existingData[i]);
+        } else if (existingData[i].pigCategory == "White"){
+            whitePigs.push(existingData[i]);
+        } else if (existingData[i].pigCategory == "Grey"){
+            greyPigs.push(existingData[i]);
+        } else if (existingData[i].pigCategory == "Chestnut"){
+            chestnutPigs.push(existingData[i]);
+        }
+    }
+    blackPigs.sort(sortPigsByNames);
+    whitePigs.sort(sortPigsByNames);
+    chestnutPigs.sort(sortPigsByNames);
+    greyPigs.sort(sortPigsByNames);
+    sortedPigs = blackPigs.concat(chestnutPigs, greyPigs, whitePigs);
+}
+
+
+function updateTable(sortedPigs: Pig[]) {
+    var table = document.getElementById("pig_table") as HTMLTableElement;
+    // table!.innerHTML = ""; // Clear the table content
+
+    // Clear all rows except the first one (column names)
+    for (var i = table!.rows.length - 1; i > 0; i--) {
+        table.deleteRow(i);
+    }
+
+    for (var i = 0; i < sortedPigs.length; i++){
+        var key = sortedPigs[i];
+        addRowToTable(key);
+    }
+}
+
+function sortPigsByNames(pig1: Pig, pig2: Pig){
+    if (pig1.pigName > pig2.pigName){
+        return 1;
+    } else if (pig1.pigName < pig2.pigName){
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
 // event listener for the "Category" dropdown
 piggoCategory.addEventListener("change", function(event){
     const result = event.target as HTMLSelectElement;
     if (result.value === 'Black'){
         piggoBreed.style.display = "block"
         piggoStrengthAbility.style.display = "block"  // only 
+        piggoStrengthRealAbility.style.display = "block"
+        piggoRunningRealAbility.style.display = "none"
+        piggoSwimmingRealAbility.style.display = "none"
         piggoLanguageAbility.style.display = "none"
         piggoSwimmingAbility.style.display = "none"
         piggoRunningAbility.style.display = "none"
@@ -104,6 +193,9 @@ piggoCategory.addEventListener("change", function(event){
         piggoStrengthAbility.style.display = "none"  
         piggoSwimmingAbility.style.display = "none"
         piggoRunningAbility.style.display = "none"
+        piggoStrengthRealAbility.style.display = "none"
+        piggoRunningRealAbility.style.display = "none"
+        piggoSwimmingRealAbility.style.display = "none"
 
         // show and hide labels
         piggoBreedLabel.style.display = "block"
@@ -118,6 +210,9 @@ piggoCategory.addEventListener("change", function(event){
         piggoLanguageAbility.style.display = "none"
         piggoStrengthAbility.style.display = "none"
         piggoRunningAbility.style.display = "none"
+        piggoStrengthRealAbility.style.display = "none"
+        piggoRunningRealAbility.style.display = "none"
+        piggoSwimmingRealAbility.style.display = "block"
 
         // show and hide labels
         piggoBreedLabel.style.display = "block"
@@ -132,6 +227,9 @@ piggoCategory.addEventListener("change", function(event){
         piggoSwimmingAbility.style.display = "none"
         piggoLanguageAbility.style.display = "none"
         piggoStrengthAbility.style.display = "none"
+        piggoStrengthRealAbility.style.display = "none"
+        piggoRunningRealAbility.style.display = "block"
+        piggoSwimmingRealAbility.style.display = "none"
 
         // show and hide labels
         piggoBreedLabel.style.display = "block"
@@ -158,8 +256,7 @@ piggoCategory.addEventListener("change", function(event){
 
 // function to dynamically add a new row when a pig is added 
 function addRowToTable(newPig:Pig){
-    
-    var table = document.getElementById("pig_table")
+    var table = document.getElementById("pig_table");
     var newRow = document.createElement("tr");
 
     var nameCell = document.createElement("td");
@@ -271,7 +368,8 @@ function addRowToTable(newPig:Pig){
     deleteBtn.addEventListener("click", function (event) {
         // Get the row to be deleted and its associated pig_Id
         var target = event.target as HTMLButtonElement;
-        var parentRow = target.parentElement?.parentElement as HTMLTableRowElement;
+        var parentRow = target.parentElement!.parentElement as HTMLTableRowElement;
+        console.log(parentRow);
         var pigId = parentRow.getAttribute("pig_Id");
     
         if (!pigId) {
@@ -282,6 +380,8 @@ function addRowToTable(newPig:Pig){
         var userConfirmation = window.confirm("Please confirm: Are you sure about the deletion?");
         if (userConfirmation) {
             console.log("User chose to proceed!");
+
+            console.log(parseInt(pigId));
     
             // Call the removePig method from PiggyController to remove the pig
             if (pigId) {

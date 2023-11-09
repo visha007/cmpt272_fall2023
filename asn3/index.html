@@ -25,21 +25,23 @@
     <section id="addPiggyFormContainer">
         <form id="addPiggyForm">
             <h2>Add New</h2>
-            <label for="piggyName">Name<span id="required">*</span></label>
+            <label for="piggyName">Name</label>
             <input type="text" id="piggyName" required>
 
-            <label for="piggyHeight">Height<span id="required">*</span></label>
-            <input type="number" id="piggyHeight" min="0" max="100" step = "0.01" required>
+            <label for="piggyHeight">Height</label><br>
+            <input type="range" min="0" max="100" value="50" class="slider" id="piggyHeight">
+            <input id="piggyHeightValue"><br>
 
-            <label for="piggyWeight">Weight<span id="required">*</span></label>
-            <input type="number" id="piggyWeight" min="0" max="100" step = "0.01" required>
+            <label for="piggyWeight">Weight</label><br>
+            <input type="range" min="0" max="100" value="50" class="slider" id="piggyWeight">
+            <input id="piggyWeightValue"><br>
 
-            <label for="piggyPersonality">Personality<span id="required">*</span></label>
+            <label for="piggyPersonality">Personality</label>
             <input type="text" id="piggyPersonality" required>
 
-            <label for="piggyCategory">Category<span id="required">*</span></label><br>
+            <label for="piggyCategory">Category</label><br>
             <select name="category" id="piggyCategory" class="input" required>
-                <option value="none">Choose category...</option>
+                <option value="">Choose category...</option>
                 <option value="Grey">Grey</option>
                 <option value="Chestnut">Chestnut</option>
                 <option value="White">White</option>
@@ -47,19 +49,22 @@
             </select>
             
             <label for="piggyBreed" id = "breed_label">Breed</label>
-            <input type="text" id="piggyBreed" value = "" required>
+            <input type="text" id="piggyBreed" required>
 
             <label for="piggyStrength" id = "strength_label" style="display: none;">Strength</label>
-            <input type="range" min="1" max="10" value="5" class="slider" id="piggyStrength" required>
+            <input type="range" min="1" max="10" value="5" class="slider" id="piggyStrength">
+            <input id="piggyStrengthValue" style="display: none;">
 
             <label for="piggyRunning" id = "run_label" style="display: none;">Running</label>
-            <input type="range" min="0" max="100" value="50" class="slider" id="piggyRunning" required>
-
-            <label for="piggySwimming" id = "swim_label" style="display: none;">Swimming</label>
-            <input type="range" min="0" max="100" value="50" class="slider" id="piggySwimming" required>
+            <input type="range" min="0" max="100" value="50" class="slider" id="piggyRunning">
+            <input id="piggyRunningValue" style="display: none;">
 
             <label for="piggyLanguage" id = "lang_label" style="display: none;">Language</label>
             <input type="text" id="piggyLanguage" value = "" required>
+
+            <label for="piggySwimming" id = "swim_label" style="display: none;">Swimming</label>
+            <input type="range" min="0" max="100" value="50" class="slider" id="piggySwimming">
+            <input id="piggySwimmingValue" style="display: none;"><br>
 
             <button type="button" class="btn btn-primary" id="submitBtn" style="background-color: blue;">Submit</button>
         </form>

@@ -9,7 +9,19 @@ export class PiggyController implements PigServices{
     pigs:Pig[]
 
     constructor(){
+        // if localStorage for this site is empty
         this.pigs = []
+        console.log(Pig.Id);   
+
+        // if localStorage for this site is not empty
+        if (localStorage.length > 0){
+            var existingData = JSON.parse(localStorage.PigArray);
+            for (var i = 0; i < existingData.length; i++){
+                this.pigs.push(existingData[i]);
+                Pig.Id++;
+            }
+            console.log(Pig.Id);
+        }
     }
     
     addPig(pig: Pig): void {
@@ -19,9 +31,21 @@ export class PiggyController implements PigServices{
     }
 
     removePig(pigId: number): void {
-        this.pigs = this.pigs.filter((piggy) => {    // filter out the element to be deleted
-            piggy.pigId != pigId
-        })   
-        localStorage.PigArray = JSON.stringify(this.pigs);
+        // Retrieve the existing PigArray from localStorage
+        const existingPigArray = JSON.parse(localStorage.PigArray);
+
+        // Find the index of the object with the specified pigId
+        const indexToDelete = existingPigArray.findIndex((pig:Pig) => 
+            pig.pigId == pigId
+        );
+
+        // Check if the pigId was found and remove it
+        if (indexToDelete != -1) {
+            existingPigArray.splice(indexToDelete, 1); // Remove the object at the specified index
+            // Update localStorage with the modified PigArray
+            localStorage.PigArray = JSON.stringify(existingPigArray);
+        } else {
+            console.log(`Pig with pigId ${pigId} not found.`);
+        }
     }
 }
