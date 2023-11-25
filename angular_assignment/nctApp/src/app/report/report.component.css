@@ -1,0 +1,30 @@
+/* Apply styles to the table */
+#data_table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* Style table header */
+  #data_table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Style table rows */
+  #data_table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  #data_table tr:hover {
+    background-color: #e6e6e6;
+  }
+  
+  /* Style table cells */
+  #data_table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+  }
+  

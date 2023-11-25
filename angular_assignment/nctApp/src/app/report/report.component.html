@@ -1,1 +1,23 @@
-<p>report works!</p>
+<table id="data_table">
+    <tr>
+        <td>Location</td>
+        <td>Baddie's Name</td>
+        <td>Time Reported</td>
+        <td>Status</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>{{ report.location }}</td>
+        <td>{{ report.baddie_name }}</td>
+        <td>{{ report.time_reported | date:"yyyy-mm-dd (hh:mm)" }}</td>
+        <td>{{ report.status }}</td>
+        <td>
+            <button id = "show_more">Show More</button>
+        </td>
+        <td>
+            <button id = "delete_report">X</button>
+        </td>
+    </tr>
+</table>
+
