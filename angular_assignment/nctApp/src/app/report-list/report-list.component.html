@@ -1,0 +1,31 @@
+<table id="data_table">
+    <!-- Table headers -->
+    <tr>
+      <td>Location</td>
+      <td>Baddie's Name</td>
+      <td>Time Reported</td>
+      <td>Status</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <!-- Table body -->
+    <tr *ngFor="let r of reportList">
+      <td>{{ r.location }}</td>
+      <td>{{ r.baddie_name }}</td>
+      <td>{{ r.time_reported | date:"yyyy-MM-dd (HH:mm)" }}</td>
+      <td>{{ r.status }}</td>
+      <td>
+        <button id="show_more">Show More</button>
+      </td>
+      <td>
+        <button 
+          id="delete_report"
+          (click)="deleteReport($event, r.reportId)"
+        >X</button>
+      </td>
+    </tr>
+</table>
+<button id="create_report_btn">CREATE NUISANCE REPORT</button>
+
+  
+  

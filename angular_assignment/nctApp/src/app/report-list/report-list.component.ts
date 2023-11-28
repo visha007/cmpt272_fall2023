@@ -7,39 +7,27 @@ import { report } from '../report';
   styleUrls: ['./report-list.component.css']
 })
 export class ReportListComponent {
-  reportList:report[]
+  reportList:report[] = []
   constructor() {
-    this.reportList = [
-      {
-        location: "Metrotown Station A",
-        baddie_name: "BaddieA",
-        time_reported: (new Date()).getTime(),
-        status: 'RESOLVED'
-      },
-      {
-        location: "Metrotown Station B",
-        baddie_name: "BaddieB",
-        time_reported: (new Date()).getTime(),
-        status: 'OPEN'
-      },
-      {
-        location: "Metrotown Station C",
-        baddie_name: "BaddieC",
-        time_reported: (new Date()).getTime(),
-        status: 'RESOLVED'
-      },
-      {
-        location: "Metrotown Station D",
-        baddie_name: "BaddieD",
-        time_reported: (new Date()).getTime(),
-        status: 'OPEN'
-      },
-      {
-        location:"Metrotown Station E",
-        baddie_name: "BaddieE",
-        time_reported: (new Date()).getTime(),
-        status: 'RESOLVED'
-      }
-    ]
+    var newReport1 = new report("LocationA", "BaddieA", (new Date()).getTime(), 'RESOLVED')
+    var newReport2 = new report("LocationB", "BaddieB", (new Date()).getTime(), 'RESOLVED')
+    var newReport3 = new report("LocationC", "BaddieC", (new Date()).getTime(), 'RESOLVED')
+
+    this.reportList.push(newReport1)
+    this.reportList.push(newReport2)
+    this.reportList.push(newReport3)
+  }
+
+  // add new report to the data table and to the storage server
+  addReport(newReport:report){
+    this.reportList.push(newReport)
+  }
+
+  // delete the report
+  deleteReport(evt:any, report_Id:number){
+    console.log(evt)
+    this.reportList = this.reportList.filter((rep:report) => rep.reportId != report_Id)
+    console.log(`Report with id ${report_Id} got deleted!`)
+    return this.reportList
   }
 }

@@ -7,13 +7,13 @@ import { report } from '../report';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent {
-  report:report
+  @Input() report:any
   constructor(){
-    this.report = {
+    /*this.report = {
       location: "Metrotown Station A",
       baddie_name: "BaddieA",
       time_reported: (new Date()).getTime(),
       status: 'RESOLVED'
-    }
+    }*/
   }
 }
