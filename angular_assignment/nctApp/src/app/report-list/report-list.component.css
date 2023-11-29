@@ -1,4 +1,8 @@
 /* Apply styles to the table */
+#container{
+    align-items: center;
+}
+
 #data_table {
     border-collapse: collapse;
     width: 100%;

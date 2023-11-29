@@ -5,13 +5,20 @@ export class report{
     baddie_name:string
     time_reported:number
     status:string
+    reporter_name:string
+    extra_info:string
+    image?:string // optional attr for image upload
 
-    constructor(location:string, baddie_name:string, time_reported:number, status:string){
+    constructor(location:string, baddie_name:string, reporter_name:string,
+        extra_info:string, uploadedImage?:string){
         this.reportId = report.reportId
         report.reportId++  // gives the next report a different Id 
         this.location = location
         this.baddie_name = baddie_name
-        this.time_reported = time_reported
-        this.status = status
+        this.status = 'OPEN',
+        this.time_reported = (new Date()).getTime()
+        this.reporter_name = reporter_name
+        this.extra_info = extra_info
+        this.image = uploadedImage
     }
 }

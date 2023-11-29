@@ -1,29 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { report } from '../report';
+import { ReportService } from '../report.service';
 
 @Component({
   selector: 'app-report-list',
   templateUrl: './report-list.component.html',
   styleUrls: ['./report-list.component.css']
 })
-export class ReportListComponent {
-  reportList:report[] = []
-  constructor() {
-    var newReport1 = new report("LocationA", "BaddieA", (new Date()).getTime(), 'RESOLVED')
-    var newReport2 = new report("LocationB", "BaddieB", (new Date()).getTime(), 'RESOLVED')
-    var newReport3 = new report("LocationC", "BaddieC", (new Date()).getTime(), 'RESOLVED')
+export class ReportListComponent implements OnInit{
+  reportList:report[]
+  query:string
 
-    this.reportList.push(newReport1)
-    this.reportList.push(newReport2)
-    this.reportList.push(newReport3)
+  // initialize vars
+  constructor(private reportService:ReportService) {
+    this.reportList = []
+    this.query = ''
   }
 
-  // add new report to the data table and to the storage server
-  addReport(newReport:report){
-    this.reportList.push(newReport)
+  // calculations done here 
+  ngOnInit(): void {
+    this.reportList = this.reportService.getReport()
   }
 
-  // delete the report
+  showStuff(evt:any){
+    console.log(evt);
+    this.reportService.getReport();
+  }
+
+  // delete the report 
   deleteReport(evt:any, report_Id:number){
     console.log(evt)
     this.reportList = this.reportList.filter((rep:report) => rep.reportId != report_Id)

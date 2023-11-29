@@ -1,0 +1,53 @@
+<form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)"
+>
+    <fieldset
+        class="d-grid gap-2 col-12"
+    >
+    <legend>Add Report</legend>
+    <input 
+        type="text"
+        name="Name"
+        placeholder="Example: Mr. Jiggles"
+        formControlName = "name"
+    >
+    <input 
+        type="text"
+        name="Location"
+        placeholder="Baddie's Location"
+        placeholder="Example: Metrotown"
+        formControlName = "location"
+    >
+    <input 
+        type="text"
+        name="Reporter"
+        placeholder="Example: Felix"
+        formControlName = "reporter"
+    >
+    <input 
+        type="text"
+        name="Extra"
+        placeholder="Extra Info"
+        formControlName = "extra_info"
+    >
+    <input 
+        type="file" 
+        (change)="onFileSelected($event)" 
+        accept="image/*"
+    >
+    <img 
+        [src]="form.get('imageUrl')?.value" 
+        *ngIf="form.get('imageUrl')?.value" 
+        alt="Uploaded Image" 
+        style="max-width: 100%; height: auto;"
+    >
+    <button
+        id = "submit_form"
+        class="btn btn-outline-primary"
+        [disabled]="!form.valid"
+    >
+    Generate Report
+    </button>
+    </fieldset>
+</form>

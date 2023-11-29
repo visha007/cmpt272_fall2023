@@ -1,55 +1,37 @@
 import { Injectable } from '@angular/core';
 import { report } from './report';
+import { HttpClient } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
-  reportList:report[]
-  constructor() {
-    this.reportList = [
-      {
-        location: "Metrotown Station A",
-        baddie_name: "BaddieA",
-        time_reported: (new Date()).getTime(),
-        status: 'RESOLVED'
-      },
-      {
-        location: "Metrotown Station B",
-        baddie_name: "BaddieB",
-        time_reported: (new Date()).getTime(),
-        status: 'OPEN'
-      },
-      {
-        location: "Metrotown Station C",
-        baddie_name: "BaddieC",
-        time_reported: (new Date()).getTime(),
-        status: 'RESOLVED'
-      },
-      {
-        location: "Metrotown Station D",
-        baddie_name: "BaddieD",
-        time_reported: (new Date()).getTime(),
-        status: 'OPEN'
-      },
-      {
-        location:"Metrotown Station E",
-        baddie_name: "BaddieE",
-        time_reported: (new Date()).getTime(),
-        status: 'RESOLVED'
-      }
-    ]
+  reportList:report[] = []
+  constructor(private httpClient: HttpClient) {
+    // get the array of reports from backend
+    this.httpClient.get('https://272.selfip.net/apps/dAlgytMzgI/collections/reportList/documents/')
+    .subscribe((data) =>{
+      var rows = <Array<any>>data;
+      console.log(rows)
+    })
   }
 
   getReport(){
-    
+    console.log(this.reportList)
+    return this.reportList;
   }
   
-  addReport(){
-
+  // add new report to the data table and to the storage server
+  addReport(newReport:report){
+    // newReport.time_reported = (new Date()).getTime()
+    this.reportList.push(newReport)
+    console.log(this.reportList)
   }
 
-  deleteReport(){
-
+  // delete the report 
+  deleteReportEntry(report_Id:number){
+    this.reportList = this.reportList.filter((rep:report) => rep.reportId != report_Id)
+    console.log(`Alert from reportService: Report with id ${report_Id} got deleted!`)
+    return this.reportList
   }
 }
