@@ -1,13 +1,13 @@
 export class report{
     static reportId = 0
-    reportId:number
-    location:string
-    baddie_name:string
-    time_reported:number
-    status:string
-    reporter_name:string
-    extra_info:string
-    image?:string // optional attr for image upload
+    reportId:number   
+    location:string   
+    baddie_name:string    
+    time_reported:number   // assigned automatically   -- send
+    status:string         // assigned automatically     -- send
+    reporter_name:string   
+    extra_info:string    
+    image?:string   // optional attr for image upload    
 
     constructor(location:string, baddie_name:string, reporter_name:string,
         extra_info:string, uploadedImage?:string){

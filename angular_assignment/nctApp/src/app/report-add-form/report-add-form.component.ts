@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { report } from '../report';
 // import defaultImage from 'assets/default_img.png'
-import { getLocaleFirstDayOfWeek } from '@angular/common';
+import { ReportService } from '../report.service';
 
 @Component({
   selector: 'app-report-add-form',
@@ -13,7 +13,7 @@ export class ReportAddFormComponent {
   form:FormGroup
   formControls: any;
 
-  constructor(){
+  constructor(private reportService:ReportService){
     const imageUrl = 'assets/default_img.png'
     let formControls = {
       name: new FormControl('', [
@@ -35,8 +35,17 @@ export class ReportAddFormComponent {
     this.form = new FormGroup(formControls)
   }
 
-  onSubmit(newReport:report){
-    console.log(newReport)
+  onSubmit(newReport:any){
+    // call the post report service 
+    const newRecordCreated = new report(
+      newReport.location,
+      newReport.name,
+      newReport.reporter,
+      newReport.extra_info,
+      newReport.imageUrl ? newReport.imageUrl : ''
+    )
+    console.log(newRecordCreated)
+    this.reportService.addReport(newRecordCreated)
   }
 
   onFileSelected(event: any) {

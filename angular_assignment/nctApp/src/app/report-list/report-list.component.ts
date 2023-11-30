@@ -13,25 +13,24 @@ export class ReportListComponent implements OnInit{
 
   // initialize vars
   constructor(private reportService:ReportService) {
-    this.reportList = []
+    this.reportList = reportService.getReportList()
+    console.log(this.reportList)
     this.query = ''
   }
 
-  // calculations done here 
+  // calculations & processing done here 
   ngOnInit(): void {
-    this.reportList = this.reportService.getReport()
+    this.reportList = this.reportService.getReportList()
   }
 
   showStuff(evt:any){
-    console.log(evt);
-    this.reportService.getReport();
+    console.log(this.reportService.reportList);
   }
 
   // delete the report 
   deleteReport(evt:any, report_Id:number){
-    console.log(evt)
+    this.reportService.deleteReportEntry(report_Id)
     this.reportList = this.reportList.filter((rep:report) => rep.reportId != report_Id)
-    console.log(`Report with id ${report_Id} got deleted!`)
-    return this.reportList
+    console.log(`Alert from reportService: Report with id ${report_Id} got deleted!`)
   }
 }
