@@ -8,12 +8,5 @@ import { report } from '../report';
 })
 export class ReportComponent {
   @Input() report:any
-  constructor(){
-    /*this.report = {
-      location: "Metrotown Station A",
-      baddie_name: "BaddieA",
-      time_reported: (new Date()).getTime(),
-      status: 'RESOLVED'
-    }*/
-  }
+  constructor(){}
 }

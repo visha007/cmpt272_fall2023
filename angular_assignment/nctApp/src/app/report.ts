@@ -8,6 +8,7 @@ export class report{
     reporter_name:string   
     extra_info:string    
     image?:string   // optional attr for image upload    
+    showDetails?: boolean; // Make sure to add '?' to make it optional
 
     constructor(location:string, baddie_name:string, reporter_name:string,
         extra_info:string, uploadedImage?:string){
@@ -19,6 +20,7 @@ export class report{
         this.time_reported = (new Date()).getTime()
         this.reporter_name = reporter_name
         this.extra_info = extra_info
-        this.image = uploadedImage
+        this.image = uploadedImage,
+        this.showDetails = false
     }
 }

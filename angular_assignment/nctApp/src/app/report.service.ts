@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { report } from './report';
 import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,12 @@ export class ReportService {
   getReportList():report[]{
     return this.reportList;
   }
-  
+
+  // fetch report by its key
+  fetchReport(reportId: number): Observable<report> {
+    return this.httpClient.get<report>('https://272.selfip.net/apps/dAlgytMzgI/collections/reportList/documents/' + reportId + '/');
+  }
+
   // add new report to the data table and to the storage server
   addReport(newReport:report):void{
     newReport.reportId = ++this.highestIdValue;
@@ -66,8 +72,8 @@ export class ReportService {
     // delete call to remove report from storage server 
     this.httpClient.delete('https://272.selfip.net/apps/dAlgytMzgI/collections/reportList/documents/' + report_Id + '/')
       .subscribe(
-        (data) => {    // if the call is a success, data printed should be null
-          console.log(data)
+        (data) => {    // if the call is a success
+          console.log(data)    // data printed should be null
         }
       )
   }

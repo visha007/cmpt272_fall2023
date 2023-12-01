@@ -7,18 +7,22 @@ import { ReportComponent } from './report/report.component';
 import { ReportAddFormComponent } from './report-add-form/report-add-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RoutingModule } from './routing.module';
+import { ReportViewComponent } from './report-view/report-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReportListComponent,
     ReportComponent,
-    ReportAddFormComponent
+    ReportAddFormComponent,
+    ReportViewComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { report } from '../report';
 // import defaultImage from 'assets/default_img.png'
 import { ReportService } from '../report.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-report-add-form',
@@ -13,7 +14,7 @@ export class ReportAddFormComponent {
   form:FormGroup
   formControls: any;
 
-  constructor(private reportService:ReportService){
+  constructor(private reportService:ReportService, private router:Router){
     const imageUrl = 'assets/default_img.png'
     let formControls = {
       name: new FormControl('', [
@@ -46,6 +47,7 @@ export class ReportAddFormComponent {
     )
     console.log(newRecordCreated)
     this.reportService.addReport(newRecordCreated)
+    this.router.navigate(['/reports'])
   }
 
   onFileSelected(event: any) {

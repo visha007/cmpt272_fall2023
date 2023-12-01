@@ -43,15 +43,16 @@ button {
     transition: background-color 0.3s, color 0.3s; /* Add smooth transition */
 }
   
-#show_more:hover {
+.show_more:hover {
     background-color: blue; /* Change button background color on hover */
 }
  
-#delete_report:hover {
+.delete_report:hover {
     background-color: red; /* Change button background color on hover */
 }
 
 #create_report_btn {
+    text-decoration: none;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -65,3 +66,22 @@ button {
 #create_report_btn:hover {
     background-color: navy;
 }
+
+.report-details {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+  
+.report-details.show {
+    display: block;
+}
+  
