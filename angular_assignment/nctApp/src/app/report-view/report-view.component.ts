@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReportService } from '../report.service';
 import { report } from '../report';
 
@@ -9,10 +9,19 @@ import { report } from '../report';
   styleUrls: ['./report-view.component.css']
 })
 export class ReportViewComponent{
+  @Output() editRep = new EventEmitter()
+
   // listOfReports:report
   fetchedReport: report | undefined;
   rId:number = this.activatedRoute.snapshot.params['reportId']
-  constructor(private activatedRoute:ActivatedRoute, private reportService:ReportService){
+  constructor(private activatedRoute:ActivatedRoute, private reportService:ReportService, private router:Router){
+  }
+
+  // send Id for the report that needs to be edited
+  sendReportId(evt:any,reportId:number){
+    evt['edit_reportId'] = reportId
+    this.editRep.emit(evt)
+    this.router.navigate(['/reports/edit/:'+reportId])
   }
 
   ngOnInit(): void {

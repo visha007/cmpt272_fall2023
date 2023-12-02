@@ -1,5 +1,9 @@
 <div id = "container">
   <app-map></app-map>
+  FILTER <input type="text" [(ngModel)]="query"> {{ query }}
+  <p>
+      Number of people: {{ reportList | filterReportsPipe:query }}
+  </p>
   <table id="data_table">
       <!-- Table headers -->
       <tr>

@@ -36,36 +36,36 @@ export class MapComponent{
   }
 
   ngOnInit(): void {
-    this.showMap()
-    this.reportList = this.reportService.getReportList()
+    this.showMap();
+    this.loadReportList();
   }
 
-  addMarker(reporList: report[]) {
-    for (var i = 0; i < reporList.length; i++){
-      const lat = parseFloat(reporList[i].location.latitude);
-      const lng = parseFloat(reporList[i].location.longitude);
+  loadReportList() {
+    this.reportList = this.reportService.getReportList();
+    this.addMarker();
+  }
 
-      L.marker([lat, lng])
-      .addTo(this.map)
-      .bindPopup(reporList[i].location.locationName + '<br>')
-      .openPopup();
+  addMarker() {
+    if (this.map && this.reportList.length > 0) {
+      for (let i = 0; i < this.reportList.length; i++) {
+        const lat = parseFloat(this.reportList[i].location.latitude);
+        const lng = parseFloat(this.reportList[i].location.longitude);
+
+        L.marker([lat, lng])
+          .addTo(this.map)
+          .bindPopup(this.reportList[i].location.locationName)
+          .openPopup();
+      }
     }
   }
 
   showMap() {
-    this.map = L.map('mapid').setView([49.27, -123], 11);   //  in setView(long, lat, zoom)
+    this.map = L.map('mapid').setView([49.27, -123], 11);
 
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ',
-
     }).addTo(this.map);
-
-    L.marker([49.2276, -123.0076]).addTo(this.map)   // lat, long then add to map
-    .bindPopup("<b>Metrotown</b><br>Cases reported.").openPopup()
-
-    this.reportList = this.reportService.getReportList()
-    this.addMarker(this.reportList)
   }
 
   onMapClick(evt:any) {

@@ -1,7 +1,6 @@
 /* Add these styles to your CSS file */
-
 form {
-    max-width: 500px; /* Set your desired width */
+    max-width: 100%; /* Set your desired width */
     margin: 0 auto; /* Center the form horizontally */
     padding: 20px;
     border: 1px solid #ccc;

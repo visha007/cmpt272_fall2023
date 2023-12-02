@@ -8,7 +8,7 @@
         Location: {{ fetchedReport.location.locationName }} <br>
         Reporter By: {{ fetchedReport.reporter_name }} <br>
         Time: {{ fetchedReport.time_reported | date : "yyyy-MM-dd (HH:mm)" }} <br>
-        Status: {{ fetchedReport.status }} <a routerLink='/'>Change</a> <br>
+        Status: {{ fetchedReport.status }} <button (click)="sendReportId($event, fetchedReport.reportId)">Change</button> <br>
         Extra Info: {{ fetchedReport.extra_info }} <br> 
     </figcaption>
     <a routerLink="/reports" class = "backBtn">Back</a>

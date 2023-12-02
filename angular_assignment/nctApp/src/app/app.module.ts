@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RoutingModule } from './routing.module';
 import { ReportViewComponent } from './report-view/report-view.component';
 import { MapComponent } from './map/map.component';
+import { ReportEditComponent } from './report-edit/report-edit.component';
+import { FilterReportsPipePipe } from './filter-reports-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MapComponent } from './map/map.component';
     ReportComponent,
     ReportAddFormComponent,
     ReportViewComponent,
-    MapComponent
+    MapComponent,
+    ReportEditComponent,
+    FilterReportsPipePipe
   ],
   imports: [
     BrowserModule,
