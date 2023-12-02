@@ -11,12 +11,12 @@ import { location } from '../locationObject';
   styleUrls: ['./report-add-form.component.css']
 })
 export class ReportAddFormComponent implements OnInit{
-  locationList:location[]
+  reportList:report[]
   form:FormGroup
   formControls: any;
 
   constructor(private reportService:ReportService, private router:Router){
-    this.locationList = this.reportService.getLocationList()
+    this.reportList = this.reportService.getReportList()
     let formControls = {
       name: new FormControl('', [
         Validators.required,
@@ -38,25 +38,16 @@ export class ReportAddFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.locationList = this.reportService.getLocationList()
+    this.reportList = this.reportService.getReportList()
   }
 
   receiveEmittedLocation(locationChosen: location) {
     console.log('Location received:', locationChosen);
-    
-    // Assuming 'locationName' is the property to be displayed in the dropdown
-    const selectedLocation = locationChosen.locationName; 
-  
-    // Find the location object from the list based on the selectedLocation
-    const foundLocation = this.locationList.find(loc => loc.locationName === selectedLocation);
-  
-    if (foundLocation) {
-      this.form.patchValue({
-        location: foundLocation // Patch only the locationName
-      });
-    }
+    this.form.patchValue({
+      location: locationChosen // Assuming locationName is the property to be displayed
+    });
   }
-  
+
   onSubmit(newReport:any){
     // call the post report service 
     const newRecordCreated = new report(
@@ -68,6 +59,7 @@ export class ReportAddFormComponent implements OnInit{
     )
     console.log(newRecordCreated)
     this.reportService.addReport(newRecordCreated)
+    // this.locationList.push(newReport.location)
     this.router.navigate(['/reports'])
   }
 

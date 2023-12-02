@@ -15,7 +15,7 @@
     >
     <select formControlName="location">
         <option value="" disabled selected>Select Location</option>
-        <option *ngFor="let location of locationList" [value]="location">{{ location.locationName }}</option>
+        <option *ngFor="let report of reportList" [value]="report.location">{{ report.location.locationName }}</option>
     </select>      
     <input 
         type="text"

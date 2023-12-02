@@ -10,13 +10,11 @@ import { location } from '../locationObject';
   styleUrls: ['./report-list.component.css']
 })
 export class ReportListComponent implements OnInit{
-  locationList:location[]
   reportList:report[]
   query:string
 
   // initialize vars
   constructor(private reportService:ReportService, private router:Router) {
-    this.locationList = reportService.getLocationList()
     this.reportList = reportService.getReportList()
     console.log(this.reportList)
     this.query = ''
