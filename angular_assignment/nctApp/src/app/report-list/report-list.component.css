@@ -1,6 +1,6 @@
 /* Apply styles to the table */
 #container{
-    align-items: center;
+    margin: 5px;
 }
 
 #data_table {

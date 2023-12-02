@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { report } from '../report';
-// import defaultImage from 'assets/default_img.png'
 import { ReportService } from '../report.service';
 import { Route, Router } from '@angular/router';
+import { location } from '../locationObject';
 
 @Component({
   selector: 'app-report-add-form',
   templateUrl: './report-add-form.component.html',
   styleUrls: ['./report-add-form.component.css']
 })
-export class ReportAddFormComponent {
+export class ReportAddFormComponent implements OnInit{
+  locationList:location[]
   form:FormGroup
   formControls: any;
 
   constructor(private reportService:ReportService, private router:Router){
-    const imageUrl = 'assets/default_img.png'
+    this.locationList = this.reportService.getLocationList()
     let formControls = {
       name: new FormControl('', [
         Validators.required,
@@ -36,6 +37,26 @@ export class ReportAddFormComponent {
     this.form = new FormGroup(formControls)
   }
 
+  ngOnInit(): void {
+    this.locationList = this.reportService.getLocationList()
+  }
+
+  receiveEmittedLocation(locationChosen: location) {
+    console.log('Location received:', locationChosen);
+    
+    // Assuming 'locationName' is the property to be displayed in the dropdown
+    const selectedLocation = locationChosen.locationName; 
+  
+    // Find the location object from the list based on the selectedLocation
+    const foundLocation = this.locationList.find(loc => loc.locationName === selectedLocation);
+  
+    if (foundLocation) {
+      this.form.patchValue({
+        location: foundLocation // Patch only the locationName
+      });
+    }
+  }
+  
   onSubmit(newReport:any){
     // call the post report service 
     const newRecordCreated = new report(

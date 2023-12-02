@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { report } from './report';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import * as CryptoJS from 'crypto-js';
+import { location } from './locationObject';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ReportService {
+  private readonly NOMINATIM_URL = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2';
+  locationList:location[] = []
   reportList:report[] = []
   highestIdValue = 0
   constructor(private httpClient: HttpClient) {
@@ -28,6 +33,7 @@ export class ReportService {
           newRecord.status = getRes[i].data.status
           newRecord.time_reported = getRes[i].data.timeReported
           this.reportList.push(newRecord)
+          this.locationList.push(newRecord.location)
         }
         this.highestIdValue = this.reportList[this.reportList.length-1].reportId
       }
@@ -40,6 +46,10 @@ export class ReportService {
     return this.reportList;
   }
 
+  getLocationList():location[]{
+    return this.locationList;
+  }
+
   // fetch report by its key
   fetchReport(reportId: number): Observable<report> {
     return this.httpClient.get<report>('https://272.selfip.net/apps/dAlgytMzgI/collections/reportList/documents/' + reportId + '/');
@@ -48,10 +58,15 @@ export class ReportService {
   // add new report to the data table and to the storage server
   addReport(newReport:report):void{
     newReport.reportId = ++this.highestIdValue;
+    this.locationList.push(newReport.location)
     const postData = {
       key: newReport.reportId.toString(), // reportId is unique and can be used as key
       data: {
-        location: newReport.location,
+        location: {
+          latitude:newReport.location.latitude,
+          longitude:newReport.location.longitude,
+          locationName:newReport.location.locationName
+        },
         name: newReport.baddie_name,
         reporter: newReport.reporter_name,
         extra_info: newReport.extra_info,
@@ -68,13 +83,37 @@ export class ReportService {
   }
 
   // delete the report 
-  deleteReportEntry(report_Id:number):void{
-    // delete call to remove report from storage server 
-    this.httpClient.delete('https://272.selfip.net/apps/dAlgytMzgI/collections/reportList/documents/' + report_Id + '/')
-      .subscribe(
-        (data) => {    // if the call is a success
-          console.log(data)    // data printed should be null
-        }
-      )
+  deleteReportEntry(report_Id: number, password: string | null): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      let entrydeleted = false;
+      if (this.verifyPassword(password)) {
+        this.httpClient.delete('https://272.selfip.net/apps/dAlgytMzgI/collections/reportList/documents/' + report_Id + '/')
+          .subscribe(
+            () => {
+              entrydeleted = true;
+              resolve(entrydeleted);
+            }
+          );
+      } else {
+        resolve(entrydeleted);
+      }
+    });
+  }
+  
+  // hashes the password and matches it to the hash provided
+  verifyPassword(inputPassword: string | null): boolean {
+    if (inputPassword == null){
+      return false
+    }
+    const hardcodedMD5Hash = 'fcab0453879a2b2281bc5073e3f5fe54';
+    const hashedPassword = CryptoJS.MD5(inputPassword).toString();
+  
+    return hashedPassword === hardcodedMD5Hash;
+  }
+
+  getReverseGeocode(lat: number, lng: number) {
+    const url = `${this.NOMINATIM_URL}&lat=${lat}&lon=${lng}`;
+    return this.httpClient.get(url);
   }
 }
+

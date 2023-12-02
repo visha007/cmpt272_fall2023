@@ -1,3 +1,4 @@
+<app-map (locationEmitter)="receiveEmittedLocation($event)"></app-map>
 <form
     [formGroup]="form"
     (ngSubmit)="onSubmit(form.value)"
@@ -12,13 +13,10 @@
         placeholder="Example: Mr. Jiggles"
         formControlName = "name"
     >
-    <input 
-        type="text"
-        name="Location"
-        placeholder="Baddie's Location"
-        placeholder="Example: Metrotown"
-        formControlName = "location"
-    >
+    <select formControlName="location">
+        <option value="" disabled selected>Select Location</option>
+        <option *ngFor="let location of locationList" [value]="location">{{ location.locationName }}</option>
+    </select>      
     <input 
         type="text"
         name="Reporter"
@@ -51,3 +49,4 @@
     </button>
     </fieldset>
 </form>
+<a id = 'back-btn' routerLink="/reports">&lt; Back</a>

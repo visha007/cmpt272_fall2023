@@ -48,4 +48,13 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+#back-btn{
+    width: fit-content;
+    margin-top: 10px;
+    margin-left: 15px;
+    color: brown;
+    font-size: larger;
+    text-decoration: none;
+}
   

@@ -1,4 +1,5 @@
 <div id = "container">
+  <app-map></app-map>
   <table id="data_table">
       <!-- Table headers -->
       <tr>
@@ -6,19 +7,19 @@
         <td>Baddie's Name</td>
         <td>Time Reported</td>
         <td>Status</td>
-        <td></td>
-        <td></td>
+        <td>Show Report Details</td>
+        <td>Delete a report</td>
       </tr>
       <!-- Table body -->
       <tr *ngFor="let r of reportList">
-        <td>{{ r.location }}</td>
+        <td>{{ r.location.locationName }}</td>
         <td>{{ r.baddie_name }}</td>
         <td>{{ r.time_reported | date : "yyyy-MM-dd (HH:mm)" }}</td>
         <td>{{ r.status }}</td>
         <td>
           <button 
             class="show_more"
-            (click)="showStuff($event, r.reportId)"
+            (click)="showStuff(r.reportId)"
           >
           Show More
           </button>
@@ -26,7 +27,7 @@
         <td>
           <button 
             class="delete_report"
-            (click)="deleteReport($event, r.reportId)"
+            (click)="deleteReport(r.reportId)"
           >X</button>
         </td>
       </tr>
