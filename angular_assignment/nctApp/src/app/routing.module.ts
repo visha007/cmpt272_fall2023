@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReportListComponent } from './report-list/report-list.component';
 import { ReportAddFormComponent } from './report-add-form/report-add-form.component';
 import { ReportViewComponent } from './report-view/report-view.component';
-import { ReportEditComponent } from './report-edit/report-edit.component';
 
 const appRoutes:Routes = [
   // list of path objects 
@@ -19,10 +18,6 @@ const appRoutes:Routes = [
   {
     path:'reports/:reportId',
     component:ReportViewComponent
-  },
-  {
-    path:'reports/edit/:reportId',
-    component:ReportEditComponent
   },
   {
     path:'',

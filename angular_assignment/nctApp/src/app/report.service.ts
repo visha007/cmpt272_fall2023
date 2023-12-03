@@ -95,8 +95,39 @@ export class ReportService {
             }
           );
       } else {
-        resolve(entrydeleted);
+        reject(entrydeleted);
       }
+    });
+  }
+
+  // call to change the status of the report
+  editReportEntry(editReport:report) : Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      let entryEdited = false;
+      const putData = {
+        key: editReport.reportId.toString(), // reportId is unique and can be used as key
+        data: {
+          location: {
+            latitude:editReport.location.latitude,
+            longitude:editReport.location.longitude,
+            locationName:editReport.location.locationName
+          },
+          name: editReport.baddie_name,
+          reporter: editReport.reporter_name,
+          extra_info: editReport.extra_info,
+          imageUrl: editReport.image,  // Add imageUrl if available
+          timeReported:editReport.time_reported.toString(),
+          status:editReport.status,
+        }
+      }
+      this.httpClient.put('https://272.selfip.net/apps/dAlgytMzgI/collections/reportList/documents/' + editReport.reportId + '/', putData)
+        .subscribe((data) =>{ 
+          var getRes = <Array<any>>data;
+          entryEdited = true
+          resolve(entryEdited);
+          console.log(entryEdited)
+          console.log(getRes)
+        })
     });
   }
   

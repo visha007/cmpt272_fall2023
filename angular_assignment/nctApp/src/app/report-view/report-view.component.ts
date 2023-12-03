@@ -17,11 +17,15 @@ export class ReportViewComponent{
   constructor(private activatedRoute:ActivatedRoute, private reportService:ReportService, private router:Router){
   }
 
-  // send Id for the report that needs to be edited
-  sendReportId(evt:any,reportId:number){
-    evt['edit_reportId'] = reportId
-    this.editRep.emit(evt)
-    this.router.navigate(['/reports/edit/:'+reportId])
+  async onStatusChangeClicked(reportToEdit:report){
+    console.log(reportToEdit.status)
+    reportToEdit.status = 'RESOLVED'
+    // do PUT call to change the report 
+    var edited = await this.reportService.editReportEntry(reportToEdit)
+    console.log(edited)
+    if (!edited){
+      alert("Status change failed!")
+    }
   }
 
   ngOnInit(): void {

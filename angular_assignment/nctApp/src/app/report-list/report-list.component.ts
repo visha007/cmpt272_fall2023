@@ -10,7 +10,7 @@ import { location } from '../locationObject';
   styleUrls: ['./report-list.component.css']
 })
 export class ReportListComponent implements OnInit{
-  reportList:report[]
+  reportList:report[] = []
   query:string
 
   // initialize vars

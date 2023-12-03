@@ -11,7 +11,7 @@ import { location } from '../locationObject';
   styleUrls: ['./report-add-form.component.css']
 })
 export class ReportAddFormComponent implements OnInit{
-  reportList:report[]
+  reportList:report[] = []
   form:FormGroup
   formControls: any;
 

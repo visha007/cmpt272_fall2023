@@ -29,7 +29,7 @@ export class MapComponent{
   private map!: L.Map
   @Output() locationEmitter = new EventEmitter()
   @Input() receivedLoc:any
-  reportList:report[]
+  reportList:report[] = []
 
   constructor(private reportService:ReportService){
     this.reportList = this.reportService.getReportList()
