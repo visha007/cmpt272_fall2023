@@ -18,14 +18,25 @@ export class ReportViewComponent{
   }
 
   async onStatusChangeClicked(reportToEdit:report){
+    var passwordEntered = this.promptForPassword()
     console.log(reportToEdit.status)
     reportToEdit.status = 'RESOLVED'
+    var edited = await this.reportService.editReportEntry(reportToEdit, passwordEntered)
     // do PUT call to change the report 
-    var edited = await this.reportService.editReportEntry(reportToEdit)
-    console.log(edited)
-    if (!edited){
-      alert("Status change failed!")
+    if (edited){
+      console.log(edited)
+      if (!edited){
+        alert("Status change failed!")
+      }
     }
+    else{
+      alert("Report alteration failed!")
+    }
+  }
+
+  promptForPassword():string | null {
+    const password = prompt('Please enter the password to delete (case-sensitive):');
+    return password
   }
 
   ngOnInit(): void {

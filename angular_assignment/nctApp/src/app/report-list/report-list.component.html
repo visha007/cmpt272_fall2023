@@ -1,7 +1,7 @@
 <div id = "container">
-  <app-map></app-map><br>
-  FILTER <input type="text" [(ngModel)]="query"> 
-  {{ query }}
+  <app-map 
+    [receivedLoc]="reportList"
+  ></app-map>
   <table id="data_table">
       <!-- Table headers -->
       <tr>

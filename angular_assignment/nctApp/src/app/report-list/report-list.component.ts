@@ -10,19 +10,20 @@ import { location } from '../locationObject';
   styleUrls: ['./report-list.component.css']
 })
 export class ReportListComponent implements OnInit{
-  reportList:report[] = []
-  query:string
+  reportList:report[]
+  query:string = ''
 
   // initialize vars
   constructor(private reportService:ReportService, private router:Router) {
     this.reportList = reportService.getReportList()
     console.log(this.reportList)
-    this.query = ''
+    // this.query
   }
 
   // calculations & processing done here 
   ngOnInit(): void {
     this.reportList = this.reportService.getReportList()
+    this.sortReportsByTimeReported();
   }
 
   showStuff(report_Id:number){
@@ -45,5 +46,14 @@ export class ReportListComponent implements OnInit{
     else{
       alert("Report deletion failed!")
     }
+  }
+  
+  sortReportsByTimeReported() {
+    this.reportList.sort((a, b) => {
+      // Assuming time_reported is a Date field, if it's a string, convert it to Date before comparison
+      const dateA = new Date(a.time_reported);
+      const dateB = new Date(b.time_reported);
+      return dateA.getTime() - dateB.getTime();
+    });
   }
 }

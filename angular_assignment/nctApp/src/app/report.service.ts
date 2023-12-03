@@ -101,9 +101,10 @@ export class ReportService {
   }
 
   // call to change the status of the report
-  editReportEntry(editReport:report) : Promise<boolean>{
+  editReportEntry(editReport:report, password: string | null) : Promise<boolean>{
     return new Promise((resolve, reject) => {
       let entryEdited = false;
+      if (this.verifyPassword(password)) {
       const putData = {
         key: editReport.reportId.toString(), // reportId is unique and can be used as key
         data: {
@@ -128,8 +129,14 @@ export class ReportService {
           console.log(entryEdited)
           console.log(getRes)
         })
-    });
+      }
+      else {
+        reject(entryEdited);
+      }
+    }
+    )
   }
+  
   
   // hashes the password and matches it to the hash provided
   verifyPassword(inputPassword: string | null): boolean {

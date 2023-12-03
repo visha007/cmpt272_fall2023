@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RoutingModule } from './routing.module';
 import { ReportViewComponent } from './report-view/report-view.component';
 import { MapComponent } from './map/map.component';
-import { FilterReportsPipePipe } from './filter-reports-pipe.pipe';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 
 @NgModule({
@@ -20,8 +19,7 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
     ReportComponent,
     ReportAddFormComponent,
     ReportViewComponent,
-    MapComponent,
-    FilterReportsPipePipe
+    MapComponent
   ],
   imports: [
     BrowserModule,
