@@ -11,13 +11,11 @@ import { location } from '../locationObject';
 })
 export class ReportListComponent implements OnInit{
   reportList:report[]
-  query:string = ''
 
   // initialize vars
   constructor(private reportService:ReportService, private router:Router) {
     this.reportList = reportService.getReportList()
     console.log(this.reportList)
-    // this.query
   }
 
   // calculations & processing done here 
@@ -49,10 +47,10 @@ export class ReportListComponent implements OnInit{
   }
   
   sortReportsByTimeReported() {
+    // sorting the data table by TimeReported
     this.reportList.sort((a, b) => {
-      // Assuming time_reported is a Date field, if it's a string, convert it to Date before comparison
-      const dateA = new Date(a.time_reported);
-      const dateB = new Date(b.time_reported);
+      const dateA = new Date(a.baddie_name);
+      const dateB = new Date(b.baddie_name);
       return dateA.getTime() - dateB.getTime();
     });
   }
