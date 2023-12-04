@@ -1,0 +1,62 @@
+.report-details {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.report-details figure {
+    margin: 0;
+    text-align: center;
+}
+
+.report-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.report-details figcaption {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+.report-details p {
+    margin-bottom: 10px;
+}
+
+.report-details hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+/* Styling for the link used as a button */
+.backBtn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff; /* Change the background color as needed */
+    border: 1px solid #007bff; /* Change the border color as needed */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+  
+/* Hover effect */
+.backBtn {
+    background-color: #0056b3; /* Change the hover background color as needed */
+    border-color: #0056b3; /* Change the hover border color as needed */
+}
+
+.backBtn:hover{
+    background-color:darkred;
+    border-color: red;
+}
+  

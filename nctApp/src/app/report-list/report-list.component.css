@@ -1,0 +1,87 @@
+/* Apply styles to the table */
+#container{
+    margin: 5px;
+}
+
+#data_table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+/* Style table header */
+#data_table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    padding: 8px;
+    text-align: left;
+}
+  
+/* Style table rows */
+#data_table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+  
+#data_table tr:hover {
+    background-color: #e6e6e6;
+}
+  
+/* Style table cells */
+#data_table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Style for buttons within the table row */
+button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #f0f0f0; /* Change button background color */
+    color: #333; /* Change button text color */
+    transition: background-color 0.3s, color 0.3s; /* Add smooth transition */
+}
+  
+.show_more:hover {
+    background-color: blue; /* Change button background color on hover */
+}
+ 
+.delete_report:hover {
+    background-color: red; /* Change button background color on hover */
+}
+
+#create_report_btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color:green;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+  
+#create_report_btn:hover {
+    background-color: navy;
+}
+
+.report-details {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+  
+.report-details.show {
+    display: block;
+}
+  

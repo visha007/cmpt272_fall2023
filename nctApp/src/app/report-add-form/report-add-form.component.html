@@ -1,0 +1,52 @@
+<app-map (locationEmitter)="receiveEmittedLocation($event)"></app-map>
+<form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)"
+>
+    <fieldset
+        class="d-grid gap-2 col-12"
+    >
+    <legend>Add Report</legend>
+    <input 
+        type="text"
+        name="Name"
+        placeholder="Example: Mr. Jiggles"
+        formControlName = "name"
+    >
+    <select formControlName="location">
+        <option value="" disabled selected>Select Location</option>
+        <option *ngFor="let report of reportList" [value]="report.location">{{ report.location.locationName }}</option>
+    </select>      
+    <input 
+        type="text"
+        name="Reporter"
+        placeholder="Example: Felix"
+        formControlName = "reporter"
+    >
+    <input 
+        type="text"
+        name="Extra"
+        placeholder="Extra Info"
+        formControlName = "extra_info"
+    >
+    <input 
+        type="file" 
+        (change)="onFileSelected($event)" 
+        accept="image/*"
+    >
+    <img 
+        [src]="form.get('imageUrl')?.value" 
+        *ngIf="form.get('imageUrl')?.value" 
+        alt="Uploaded Image" 
+        style="max-width: 100%; height: auto;"
+    >
+    <button
+        id = "submit_form"
+        class="btn btn-outline-primary"
+        [disabled]="!form.valid"
+    >
+    Generate Report
+    </button>
+    </fieldset>
+</form>
+<a id = 'back-btn' routerLink="/reports">&lt; Back</a>

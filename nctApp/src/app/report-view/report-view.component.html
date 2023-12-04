@@ -1,0 +1,15 @@
+<p *ngIf="fetchedReport" class="report-details">
+    <figure>
+        <img *ngIf="fetchedReport.image" [src]="fetchedReport.image" alt="Baddie's Image"><br>
+        <img *ngIf="!fetchedReport.image" src="assets/default_img.png" alt="Default Image"><br>
+    </figure>
+    <figcaption>
+        Baddie's Name: {{ fetchedReport.baddie_name }} <br>
+        Location: {{ fetchedReport.location.locationName }} <br>
+        Reporter By: {{ fetchedReport.reporter_name }} <br>
+        Time: {{ fetchedReport.time_reported | date : "yyyy-MM-dd (HH:mm)" }} <br>
+        Status: {{ fetchedReport.status }} <button (click)="onStatusChangeClicked(fetchedReport)">Change</button> <br>
+        Extra Info: {{ fetchedReport.extra_info }} <br> 
+    </figcaption>
+    <a routerLink="/reports" class = "backBtn">Back</a>
+</p>
