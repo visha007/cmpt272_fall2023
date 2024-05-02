@@ -36,7 +36,7 @@ export class ReportViewComponent{
 
   promptForPassword():string | null {
     const password = prompt('Please enter the password to delete (case-sensitive):');
-    return password
+    return password;
   }
 
   ngOnInit(): void {
